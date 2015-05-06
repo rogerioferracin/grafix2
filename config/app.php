@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'pt',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -145,6 +145,13 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+        /**
+         * Installed plugins
+         */
+        'Illuminate\Html\HtmlServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Kamaln7\Toastr\ToastrServiceProvider',
+
 	],
 
 	/*
@@ -192,6 +199,12 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+        /**
+         * Installed
+         */
+        'Form'      => 'Illuminate\Html\FormFacade',
+        'HTML'      => 'Illuminate\Html\HtmlFacade',
+        'Toastr'    => 'Kamaln7\Toastr\Facades\Toastr',
 
 	],
 
