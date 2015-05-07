@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
+use Grafix\database\seeds\GruposTableSeeder;
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -14,7 +16,8 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		 $this->call('GruposTableSeeder');
+		 $this->call('UsersTableSeeder');
 	}
 
 }

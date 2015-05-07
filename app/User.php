@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Grafix;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +22,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes', 'funcao_id'];
+
+    public static function rules()
+    {
+        return [
+            'name' => 'required',
+            'username' => 'required|unique|between:4,20',
+            'email' => 'required|email',
+            'password' => 'required|between:4,12|confirmed',
+        ];
+    }
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -30,5 +40,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+    public function funcao()
+    {
+        return $this->hasOne('Funcao');
+    }
 
 }

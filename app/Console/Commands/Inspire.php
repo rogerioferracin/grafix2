@@ -1,4 +1,4 @@
-<?php namespace App\Console\Commands;
+<?php namespace Grafix\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
