@@ -3,6 +3,7 @@
 use Grafix\Http\Requests;
 use Grafix\Http\Controllers\Controller;
 
+use Grafix\Libraries\Helpers\LogHelper;
 use Grafix\Http\Requests\UserFormRequest;
 use Grafix\User;
 
@@ -46,8 +47,6 @@ class UsersController extends Controller {
      */
 	public function postNovo(UserFormRequest $request)
 	{
-//        dd($request->all());
-
 		$user = new User();
         $user->fill($request->all());
 
@@ -61,13 +60,8 @@ class UsersController extends Controller {
             return redirect('/usuarios');
 
         } catch(\Exception $e) {
-            \Log::error('Ocorreu um erro ao gravar a entidade: ['
-                . $e->getCode() . ']['
-                . $e->getLine() . '] - '
-                . $e->getMessage());
-
-            \Toastr::error('Ocorreu um erro grave. Contate o suport técnico', 'Erro');
-
+            LogHelper::launchErrorLog($e);
+            \DB::rollBack();
             return redirect('/');
         }
 	}

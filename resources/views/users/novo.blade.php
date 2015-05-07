@@ -35,7 +35,7 @@
                     <div class="form-group">
                         {!! Form::label('funcao_id', 'Função*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::select('funcao_id', Grafix\Models\Funcao::getFuncoes() ,null, array('class'=>'form-control')) !!}
+                            {!! Form::select('funcao', Grafix\Models\Funcao::getFuncoes() ,null, array('class'=>'form-control')) !!}
                             @if($errors->has('funcao_id')) <span class="text-danger small"> {!! $errors->first('funcao_id') !!} </span> @endif
                         </div>
                         {!! Form::label('dica_senha', 'Dica da senha', array('class'=>'col-md-2 control-label')) !!}
