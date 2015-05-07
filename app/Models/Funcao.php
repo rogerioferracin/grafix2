@@ -14,7 +14,7 @@ class Funcao extends Model
     {
         $funcoes = Funcao::all()->lists('funcao', 'id');
 
-        return $funcoes;
+        return array_merge([null => 'Selecione um grupo...'], $funcoes);
     }
 
 }

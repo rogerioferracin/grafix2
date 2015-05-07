@@ -30,6 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'name'      => 'required',
             'username'  => 'required|between:4,20|unique:users,username',
             'email'     => 'required|email',
+            'funcao_id' => 'required|numeric',
             'password'  => 'required|between:4,12|confirmed',
         ];
     }
