@@ -84,6 +84,7 @@
                 <div id="dashboard_links" class="col-md-2 pull-right no-print">
                     @yield('sidebar')
                     <hr>
+                    @include('flash::message')
                     @if($errors->has())
                         <div id="erros" data-alert class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -120,6 +121,8 @@
 <script src="{{ URL::asset('plugins/jquery-mask/jquery.maskMoney.js') }}"></script>
 <script src="{{ URL::asset('plugins/toastr/toastr.min.js') }}"></script>
 {!! Toastr::render() !!}
+
+<script>$('#flash-overlay-modal').appendTo('body').modal();</script>
 
 <!--Load js for page-->
 <script src="{{ URL::asset('js/dashboard.js') }}"></script>

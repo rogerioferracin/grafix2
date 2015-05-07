@@ -135,7 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-
+        'Illuminate\Html\HtmlServiceProvider',
 		/*
 		 * Application Service Providers...
 		 */
@@ -144,13 +144,13 @@ return [
 		'Grafix\Providers\ConfigServiceProvider',
 		'Grafix\Providers\EventServiceProvider',
 		'Grafix\Providers\RouteServiceProvider',
-
         /**
          * Installed plugins
          */
-        'Illuminate\Html\HtmlServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Kamaln7\Toastr\ToastrServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'Mitul\Generator\GeneratorServiceProvider'
 
 	],
 
@@ -205,6 +205,7 @@ return [
         'Form'      => 'Illuminate\Html\FormFacade',
         'HTML'      => 'Illuminate\Html\HtmlFacade',
         'Toastr'    => 'Kamaln7\Toastr\Facades\Toastr',
+        'Flash' => 'Laracasts\Flash\Flash'
 
 	],
 
