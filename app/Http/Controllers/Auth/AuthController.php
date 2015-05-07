@@ -54,9 +54,11 @@ class AuthController extends Controller {
     public function postLogin(LoginRequest $request)
     {
         if($this->auth->attempt($request->only('username', 'password'))) {
+            \Toastr::info('Bem vindo ao Grafix!');
             return redirect('/');
         }
 
+        \Toastr::error('Ocorreu um erro ao logar no sistema');
         return redirect('auth/login')
             ->withErrors([
                 'username' => 'Seu username ou senha não conferem. Tente novamente'
