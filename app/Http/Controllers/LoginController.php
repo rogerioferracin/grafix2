@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Grafix\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Grafix\Http\Requests;
+use Grafix\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 

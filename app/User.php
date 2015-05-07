@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Grafix;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes'];
+	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes', 'funcao_id'];
 
     public static function rules()
     {
@@ -40,5 +40,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+    public function funcao()
+    {
+        return $this->hasOne('Funcao');
+    }
 
 }

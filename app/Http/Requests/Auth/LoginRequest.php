@@ -1,6 +1,6 @@
-<?php namespace App\Http\Requests\Auth;
+<?php namespace Grafix\Http\Requests\Auth;
 
-use App\Http\Requests\Request;
+use Grafix\Http\Requests\Request;
 
 class LoginRequest extends Request {
 

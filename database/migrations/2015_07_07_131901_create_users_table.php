@@ -21,6 +21,10 @@ class CreateUsersTable extends Migration {
 			$table->string('password', 60);
             $table->boolean('ativo')->default(1);
             $table->mediumText('observacoes');
+
+            $table->integer('funcao_id')->unsigned();
+            $table->foreign('funcao_id')->references('id')->on('funcoes');
+
 			$table->rememberToken();
 			$table->timestamps();
 		});

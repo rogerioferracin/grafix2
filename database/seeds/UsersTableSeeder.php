@@ -1,22 +1,29 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
 use Illuminate\Support\Facades\DB;
 
-class UserTableSeeder extends Seeder
-{
-    public function seed()
+use Grafix\User;
+
+
+class UsersTableSeeder extends Seeder {
+
+    public function run()
     {
         //delete old data
         DB::table('users')->delete();
 
-        DB::create([
+
+        $user = [
             'username' => 'admin',
-            'password' => bcrypt('admin'),
+            'password' => Hash::make('admin'),
             'name'     => 'Administrador',
             'email'    => 'admin@email.com',
-            'funcao_id' => 'admin',
-        ]);
+            'funcao_id' => 1,
+        ];
+
+        User::insert($user);
+
     }
+
 }

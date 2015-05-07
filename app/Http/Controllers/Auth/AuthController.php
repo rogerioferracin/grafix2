@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php namespace Grafix\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Grafix\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-use App\User;
-use App\Http\Requests\Auth\LoginRequest;
+use Grafix\User;
+use Grafix\Http\Requests\Auth\LoginRequest;
 
 class AuthController extends Controller {
 
