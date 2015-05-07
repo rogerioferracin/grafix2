@@ -27,10 +27,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function rules()
     {
         return [
-            'name' => 'required',
-            'username' => 'required|unique|between:4,20',
-            'email' => 'required|email',
-            'password' => 'required|between:4,12|confirmed',
+            'name'      => 'required',
+            'username'  => 'required|between:4,20|unique:users,username',
+            'email'     => 'required|email',
+            'password'  => 'required|between:4,12|confirmed',
         ];
     }
 
@@ -41,9 +41,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    /** ***************************************************************************************************************
+     * Relations
+     */
     public function funcao()
     {
-        return $this->hasOne('Funcao');
+        return $this->belongsTo('Grafix\Models\Funcao');
+    }
+
+    /** ***************************************************************************************************************
+     * Mutators
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = \Hash::make($value);
     }
 
 }

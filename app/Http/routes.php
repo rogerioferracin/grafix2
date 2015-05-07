@@ -17,3 +17,18 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+/**
+ * USERS
+ */
+Route::controller('usuarios', 'UsersController');
+
+
+
+
+Route::resource('tintas', 'TintaController');
+
+Route::get('tintas/{id}/delete', [
+    'as' => 'tintas.delete',
+    'uses' => 'TintaController@destroy',
+]);
