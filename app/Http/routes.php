@@ -23,6 +23,11 @@ Route::controllers([
  */
 Route::controller('usuarios', 'UsersController');
 
+/**
+ * CLIENTES
+ */
+Route::controller('clientes', 'ClientesController');
+
 
 
 
