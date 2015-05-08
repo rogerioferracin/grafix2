@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th>Nome completo:</th>
-                                <td colspan="3"><span class="h4">{!! $user->nome !!}</span></td>
+                                <td colspan="3"><span class="h4">{!! $user->name !!}</span></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,10 +24,10 @@
                                 <td>{!! $user->email !!}</td>
                             </tr>
                             <tr>
-                                <th>Grupo:</th>
-                                <td>{!! $user->grupo !!}</td>
+                                <th>Função:</th>
+                                <td>{!! $user->funcao->funcao !!}</td>
                                 <th>Dica da senha:</th>
-                                <td>{!! $user->dica_senha !!}</td>
+                                <td>{!! $user->dica_de_senha !!}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -41,8 +41,9 @@
 @stop
 
 @section('sidebar')
-    @include('usuarios.sidebar')
+    @include('users.sidebar')
 
+    @if(auth()->id() === $user->id || auth()->id() === 1)
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#" class="tab-link  tab-link-title" id="overview"><span class="h4">Usuário</span></a></li>
         <li>
@@ -51,6 +52,7 @@
             </a>
         </li>
     </ul>
+    @endif
 @stop
 
 @section('scripts')

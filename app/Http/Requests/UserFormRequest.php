@@ -22,7 +22,20 @@ class UserFormRequest extends Request {
 	 */
 	public function rules()
 	{
-		return User::rules();
+//        $user = User::find($this->user()->id);
+
+        $id = $this->route()->parameter('one');
+
+        switch($this->method()) {
+            case 'POST': {
+		        return User::rules();
+            }
+
+            case 'PUT' : {
+                return User::rules($id);
+            }
+        }
+
 	}
 
     /***

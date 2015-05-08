@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('username')->unique();
 			$table->string('email')->unique();
 			$table->string('password', 60);
+			$table->string('dica_de_senha', 40);
             $table->boolean('ativo')->default(1);
             $table->mediumText('observacoes');
 
@@ -26,6 +27,7 @@ class CreateUsersTable extends Migration {
             $table->foreign('funcao_id')->references('id')->on('funcoes');
 
 			$table->rememberToken();
+            $table->softDeletes();
 			$table->timestamps();
 		});
 	}

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" ng-app="grafixApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,7 @@
     <link href="{{ URL::asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('plugins/select2/select2.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('plugins/select2/select2-bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('plugins/angular/ng-table/ng-table.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/plugins/angular/dialog/dialogs.min.css') }}" rel="stylesheet">
 
 
 
@@ -116,16 +116,23 @@
 ================================================== -->
 
 <script src="{{ URL::asset('/plugins/angular/angular.min.js') }}"></script>
+<script src="{{ URL::asset('/plugins/angular/angular-sanitize.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/jquery-mask/jquery.maskedinput.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/jquery-mask/jquery.maskMoney.js') }}"></script>
 <script src="{{ URL::asset('plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ URL::asset('/plugins/angular/ui/ui-bootstrap-tpls-0.12.1.min.js') }}"></script>
+<script src="{{ URL::asset('/plugins/angular/dialog/dialogs.min.js') }}"></script>
+<script src="{{ URL::asset('/plugins/angular/dialog/dialogs-default-translations.min.js') }}"></script>
 {!! Toastr::render() !!}
-
-<script>$('#flash-overlay-modal').appendTo('body').modal();</script>
 
 <!--Load js for page-->
 <script src="{{ URL::asset('js/dashboard.js') }}"></script>
+<script src="{{ URL::asset('js/controllers/controllers.js') }}"></script>
+
+<script>
+
+</script>
 
 @yield('scripts')
 

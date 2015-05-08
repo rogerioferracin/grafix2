@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword;
+	use Authenticatable, CanResetPassword, SoftDeletes;
 
 	/**
 	 * The database table used by the model.
@@ -22,16 +23,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes', 'funcao_id'];
+	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes', 'funcao_id', 'dica_de_senha'];
 
-    public static function rules()
+    public static function rules($id = null)
     {
         return [
             'name'      => 'required',
-            'username'  => 'required|between:4,20|unique:users,username',
+            'username'  => 'required|between:4,20|unique:users,username' . ($id ? ",$id" : ''),
             'email'     => 'required|email',
             'funcao_id' => 'required|numeric|not_in:0',
-            'password'  => 'required|between:4,12|confirmed',
+            'password'  => 'sometimes|required|between:4,12|confirmed',
         ];
     }
 
@@ -41,6 +42,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+    //Softdelete -----------------------------------------------------------------------------
+    protected $dates = ['deleted_at'];
 
     /** ***************************************************************************************************************
      * Relations

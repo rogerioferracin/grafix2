@@ -55,7 +55,7 @@ class UsersController extends Controller {
         try {
             $user->save();
             \DB::commit();
-            \Toastr::info('Usuário ' . $user->name . 'cadastrado com sucesso', 'Sucesso');
+            \Toastr::success('Usuário ' . $user->name . 'cadastrado com sucesso', 'Sucesso');
 
             return redirect('/usuarios');
 
@@ -72,9 +72,11 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function getFicha($id)
 	{
-		//
+		$user = User::find($id);
+
+        return view('users.ficha', ['page_title'=>'Ficha de usuário', 'user'=>$user]);
 	}
 
 	/**
@@ -86,6 +88,11 @@ class UsersController extends Controller {
 	public function getAltera($id)
 	{
 		$user = User::find($id);
+
+        if(!$user){
+            \Toastr::warning('Usuário não encontrado', 'Atenção');
+            return redirect('/usuarios');
+        }
 
 		return view('users.altera', ['page_title'=>'Altera usuário', 'model'=>$user]);
 	}
@@ -99,18 +106,85 @@ class UsersController extends Controller {
 	 */
 	public function putAltera(UserFormRequest $request, $id)
 	{
-		\Toastr::info('Ok working ');
+
+        $user = User::find($id);
+        $user->fill($request->all());
+
+        \DB::beginTransaction();
+
+        try {
+
+            $user->save();
+            \DB::commit();
+
+            \Toastr::success('Usuário ' . $user->name . ' atualizado com sucesso', 'Sucesso');
+
+            return redirect('/usuarios');
+
+        } catch(\Exception $e) {
+            LogHelper::launchErrorLog($e);
+            \DB::rollBack();
+            return redirect('/');
+        }
+
 	}
 
 	/**
 	 * Remove the specified resource from storage.
-	 *
+	 * TODO Método para exlcuir usuário com angular
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function deleteApagar($id)
 	{
-		//
+        $user = User::find($id);
+
+        if(!$user) {
+            $response = array(
+                'fail'   => true,
+                'mensagem'  => 'Usuário não encontrado. Tente novamente!'
+            );
+        }
 	}
+
+    /**
+     * ALtera senha de usuário
+     * @param $id id do usuário
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function putAlteraSenha($id)
+    {
+
+        $user = User::find($id);
+
+        if(!$user) {
+            $response = array(
+                'fail'   => true,
+                'mensagem'  => 'Usuário não encontrado. Tente novamente!'
+            );
+        } else {
+
+            if(!\Hash::check(\Input::get('senha_atual'), $user->password)) {
+                $response = array(
+                    'fail'   => true,
+                    'mensagem'  => 'Senha atual não coincide. Tente novamente!'
+                );
+            } else {
+
+                $user->password = \Input::get('nova_senha');
+
+                \DB::transaction(function() use ($user) {
+                    $user->save();
+                });
+
+                $response = array(
+                    'success'   => true,
+                    'mensagem'  => 'Senha alterada com sucesso. Você será deslogado para logar com a nova senha!'
+                );
+            }
+        }
+
+        return \Response::json($response);
+    }
 
 }

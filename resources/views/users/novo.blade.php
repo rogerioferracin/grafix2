@@ -13,6 +13,20 @@
             <div class="panel-collapse collapse in" id="dados">
                 <div class="panel-body">
                     @include('users.partials._user_form')
+                    {{--Cadastra Senha--}}
+                    <div class="form-group">
+                        {!! Form::label('password', 'Senha*', array('class'=>'col-md-2 control-label')) !!}
+                        <div class="col-md-4">
+                            {!! Form::password('password', array('class'=>'form-control')) !!}
+                            @if($errors->has('password')) <span class="text-danger small"> {!! $errors->first('password') !!} </span> @endif
+                        </div>
+
+                        {!! Form::label('password_confirmation', 'Confirma senha*', array('class'=>'col-md-2 control-label')) !!}
+                        <div class="col-md-4">
+                            {!! Form::password('password_confirmation', array('class'=>'form-control')) !!}
+                            @if($errors->has('password_confirmation')) <span class="text-danger small"> {!! $errors->first('password_confirmation') !!} </span> @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

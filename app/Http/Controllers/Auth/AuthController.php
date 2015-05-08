@@ -55,7 +55,7 @@ class AuthController extends Controller {
     {
         if($this->auth->attempt($request->only('username', 'password'))) {
             \Toastr::info('Bem vindo ao Grafix!');
-            return redirect('/');
+            return \Redirect::intended('/');
         }
 
         \Toastr::error('Ocorreu um erro ao logar no sistema');
