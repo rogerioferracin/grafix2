@@ -83,9 +83,11 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getAltera($id)
 	{
-		//
+		$user = User::find($id);
+
+		return view('users.altera', ['page_title'=>'Altera usuário', 'model'=>$user]);
 	}
 
 	/**
@@ -93,10 +95,11 @@ class UsersController extends Controller {
 	 *
 	 * @param  int  $id
 	 * @return Response
+	 * @param UserFormRequest $request
 	 */
-	public function update($id)
+	public function putAltera(UserFormRequest $request, $id)
 	{
-		//
+		\Toastr::info('Ok working ');
 	}
 
 	/**

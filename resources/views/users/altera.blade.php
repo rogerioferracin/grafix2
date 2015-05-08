@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('content')
-    {!! Form::open(array('url'=>'usuarios/novo', 'class'=>'form-horizontal')) !!}
+    {!! Form::model($model, array('url'=>['usuarios/altera', 'id'=>$model->id], 'class'=>'form-horizontal', 'method'=>'put')) !!}
     <div class="panel-group" id="accordion">
         {{--PANEL DADOS ------------------------------------------------------- --}}
         <div class="panel panel-info">
@@ -21,7 +21,7 @@
 
     {{--BUTTON--}}
     <div class="col-md-12 clearfix">
-        {!! Form::submit('Cadastrar', array('class'=>'btn btn-primary pull-right submit-confirm')) !!}
+        {!! Form::submit('Atualizar', array('class'=>'btn btn-primary pull-right submit-confirm')) !!}
     </div>
 
     <div class="modal fade">
@@ -39,7 +39,6 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-
         })
     </script>
 @stop

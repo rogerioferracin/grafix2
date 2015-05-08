@@ -19,7 +19,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->funcao->funcao }}</td>
                 <td>
-                    <a href="{!! url('usuarios/atualiza', ['id'=>$user->id]) !!}"><i class="fa fa-folder-open" data-toggle="tooltip" title="Atualiza usuário"></i> </a> |
+                    <a href="{!! url('usuarios/altera', ['id'=>$user->id]) !!}"><i class="fa fa-folder-open" data-toggle="tooltip" title="Altera usuário"></i> </a> |
                     <a href="{!! url('usuarios/ficha', ['id'=>$user->id]) !!}"><i class="fa fa-list" data-toggle="tooltip" title="Ficha de usuário"></i> </a>
                 </td>
             </tr>
