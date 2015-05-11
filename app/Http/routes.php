@@ -12,6 +12,7 @@
 */
 
 use Grafix\Models\Endereco;
+use Grafix\Services\Validation;
 
 Route::get('/', 'HomeController@index');
 
@@ -31,8 +32,9 @@ Route::controller('usuarios', 'UsersController');
 Route::controller('clientes', 'ClientesController');
 
 
-
-
+/**
+ * TINTAS
+ */
 Route::resource('tintas', 'TintaController');
 
 Route::get('tintas/{id}/delete', [
@@ -40,6 +42,11 @@ Route::get('tintas/{id}/delete', [
     'uses' => 'TintaController@destroy',
 ]);
 
+
+/**
+ * CONTATOS
+ */
+Route::controller('contatos', 'ContatoController');
 
 /**
  * ENDERECOS
@@ -64,4 +71,12 @@ Route::get('enderecos/pesquisa/{pesquisa}', function($pesquisa){
     }
     return \Response::json($response);
 
+});
+
+
+/**
+ * VALIDATORS
+ */
+Validator::resolver(function($translator, $data, $rules, $messages){
+    return new Validation($translator, $data, $rules, $messages);
 });

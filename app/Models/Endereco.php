@@ -12,7 +12,7 @@ class Endereco extends Model
      * @var array
      */
 	public $fillable = [
-	    "logradouro", "numero", "complemento", "bairro", "cidade", "uf", "observacoes"
+	    "logradouro", "numero", "complemento", "bairro", "cidade", "uf", "observacoes", "cep"
 	];
 
     /**

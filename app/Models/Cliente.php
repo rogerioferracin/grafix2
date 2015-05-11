@@ -49,7 +49,7 @@ class Cliente extends Model {
         return [
             'razao_social'  => 'required',
             'nome_fantasia'  => 'required',
-            'cnpj_cpf'      => 'required|unique:clientes,cnpj_cpf' . ($id ? ",$id" : ''),
+            'cnpj_cpf'      => 'required|uniqueCnpjCpf:clientes,cnpj_cpf' . ($id ? ",$id" : ''),
         ];
     }
 

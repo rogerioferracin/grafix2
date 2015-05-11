@@ -74,6 +74,13 @@ class UsersController extends Controller {
 	 */
 	public function getFicha($id)
 	{
+        $user = User::find($id);
+
+        if(!$user){
+            \Toastr::warning('Usuário não encontrado', 'Atenção');
+            return redirect('/usuarios');
+        }
+
 		$user = User::find($id);
 
         return view('users.ficha', ['page_title'=>'Ficha de usuário', 'user'=>$user]);

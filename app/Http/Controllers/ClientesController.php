@@ -70,10 +70,65 @@ class ClientesController extends Controller
         }
     }
 
+    /**
+     * Show lista de clientes cadastrados
+     *
+     * @param $id
+     * @return \Illuminate\View\View
+     */
     public function getFicha($id)
     {
         $cliente = Cliente::find($id);
+        if(!$cliente){
+            \Toastr::warning('Cliente não encontrado', 'Atenção');
+            return redirect('/clientes');
+        }
 
         return view('clientes.ficha', ['cliente'=>$cliente, 'page_title' => 'Ficha de cliente']);
+    }
+
+    /**
+     * @param $id Id do cliente
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function getAltera($id)
+    {
+        $model = Cliente::with('endereco')->find($id);
+
+//        dd($cliente);
+
+        if(!$model){
+            \Toastr::warning('Cliente não encontrado', 'Atenção');
+            return redirect('/clientes');
+        }
+
+        return view('clientes.altera', ['model'=>$model, 'page_title' => 'Altera ficha de cliente']);
+    }
+
+    public function putAltera(ClienteFormRequest $request ,$id)
+    {
+        $cliente = Cliente::find($id);
+        $cliente->fill($request->all());
+        $cliente->endereco->fill($request->all());
+
+        \DB::beginTransaction();
+
+        try {
+
+            $cliente->push();
+            \DB::commit();
+
+            \Toastr::success('Cliente ' . $cliente->namo_fantasia . ' atualizado com sucesso', 'Sucesso');
+
+            return redirect('/clientes');
+
+        } catch(\Exception $e) {
+            LogHelper::launchErrorLog($e);
+            \DB::rollBack();
+            return redirect('/');
+        }
+
+
+        return redirect('clientes');
     }
 }

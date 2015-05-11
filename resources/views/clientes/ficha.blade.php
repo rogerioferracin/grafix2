@@ -26,7 +26,7 @@
                                     <tr>
                                         <th>Nome:</th>
                                         <td colspan="3"><span class="h4">
-                                                <a href="{!! url('clientes/atualiza', ['id'=>$cliente->id]) !!}"> {!! $cliente->nome_fantasia !!}</a>
+                                                <a href="{!! url('clientes/altera', ['id'=>$cliente->id]) !!}"> {!! $cliente->nome_fantasia !!}</a>
                                             </span></td>
                                     </tr>
                                     </thead>

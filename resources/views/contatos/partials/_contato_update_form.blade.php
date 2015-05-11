@@ -1,7 +1,8 @@
 <div class="form-group">
     {!! Form::label('nome', 'Nome*', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">
-        {!! Form::text_with_error('nome', null, array('class'=>'form-control'), $errors) !!}
+        {!! Form::text('nome', $model->contato->, array('class'=>'form-control')) !!}
+        @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('nome') !!} </span> @endif
     </div>
     {!! Form::label('sobrenome', 'Sobrenome', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">
@@ -23,7 +24,8 @@
 <div class="form-group">
     {!! Form::label('telefone', 'Telefone*', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">
-        {!! Form::text_with_error('telefone', null, array('class'=>'form-control'), $errors) !!}
+        {!! Form::text('telefone', null, array('class'=>'form-control')) !!}
+        @if($errors->has('telefone')) <span class="text-danger small"> {!! $errors->first('telefone') !!} </span> @endif
     </div>
     {!! Form::label('celular', 'Celular', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">

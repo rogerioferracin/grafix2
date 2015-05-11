@@ -144,6 +144,7 @@ return [
 		'Grafix\Providers\ConfigServiceProvider',
 		'Grafix\Providers\EventServiceProvider',
 		'Grafix\Providers\RouteServiceProvider',
+        'Grafix\Providers\MacroServiceProvider',
         /**
          * Installed plugins
          */
