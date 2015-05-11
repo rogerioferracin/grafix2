@@ -25,6 +25,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $fillable = ['name', 'email', 'password', 'username', 'ativo', 'observacoes', 'funcao_id', 'dica_de_senha'];
 
+    /**
+     * RULES
+     * @param null $id
+     * @return array
+     */
     public static function rules($id = null)
     {
         return [

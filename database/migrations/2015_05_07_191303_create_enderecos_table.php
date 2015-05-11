@@ -22,7 +22,13 @@ class CreateEnderecosTable extends Migration
 			$table->string('bairro', 90);
 			$table->string('cidade', 90);
 			$table->string('uf', 2);
+			$table->string('cep', 15);
 			$table->mediumText('observacoes');
+
+            //Realtions
+            $table->integer('endereco_morph_id')->unsigned();
+            $table->string('endereco_morph_type');
+
 			$table->timestamps();
 		});
 	}

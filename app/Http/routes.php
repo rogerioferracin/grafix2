@@ -11,6 +11,8 @@
 |
 */
 
+use Grafix\Models\Endereco;
+
 Route::get('/', 'HomeController@index');
 
 Route::controllers([
@@ -37,3 +39,29 @@ Route::get('tintas/{id}/delete', [
     'as' => 'tintas.delete',
     'uses' => 'TintaController@destroy',
 ]);
+
+
+/**
+ * ENDERECOS
+ */
+Route::get('enderecos/pesquisa/{pesquisa}', function($pesquisa){
+
+    $data = \DB::table('ceps')
+        ->where('cep', 'like', '%'.$pesquisa.'%')
+        ->orWhere('logradouro', 'like', '%'.$pesquisa.'%')
+        ->get();
+
+    if($data) {
+        $response = array(
+            'success'   => true,
+            'data'      => $data
+        );
+    } else {
+        $response = array(
+            'fail'   => true,
+            'message'   => 'Nenhum resultado encontrado na pesquisa!'
+        );
+    }
+    return \Response::json($response);
+
+});

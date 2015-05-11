@@ -2,7 +2,7 @@
  * Created by Arte 01 on 28/04/2015.
  */
 
-angular.module('ui.bootstrap.lamina', ['ui.bootstrap'])
+angular.module('ui.bootstrap.lamina', ['ui.bootstrap', 'AppServices'])
     .controller('LaminaModalController', function($scope, $http, $modal){
         //Objects
         $scope.masterData = {};

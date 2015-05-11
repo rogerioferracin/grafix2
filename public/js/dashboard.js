@@ -444,7 +444,7 @@ function MakeSearchAddressModal() {
                 });
                 return;
             }
-            var pesquisando = $.get('/enderecos/pesquisa-endereco/'+pesquisa);
+            var pesquisando = $.get('/enderecos/pesquisa/'+pesquisa);
             pesquisando.done(function(result){
                 if(result.fail) {
                     bootbox.alert({
