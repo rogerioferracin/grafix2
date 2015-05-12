@@ -76,6 +76,13 @@ Route::get('enderecos/pesquisa/{pesquisa}', function($pesquisa){
 });
 
 
+Route::group(['prefix'=>'dialogs'], function(){
+    Route::get('contato-modal', function(){
+        return view('dialogs.contatoModal')->render();
+//        return File::get(base_path('resources/views/dialogs/contatoModal.blade.php'));
+    });
+});
+
 /**
  * VALIDATORS
  */

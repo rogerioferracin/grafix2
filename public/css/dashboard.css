@@ -710,3 +710,8 @@ body {
     border: 1px solid #e3e3e3;
     border-radius: 0 ;
 }
+
+div.contato-modal-class .modal-body {
+    max-height: 800px;
+    overflow: auto;
+}

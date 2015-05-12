@@ -13,7 +13,7 @@
             <div class="panel-collapse collapse in" id="dados">
                 <div class="panel-body">
 
-                    @include('templates.partials.contato_form')
+                    @include('contatos.partials._contato_update_form')
 
                 </div>
             </div>

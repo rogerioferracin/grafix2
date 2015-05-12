@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div role="tabpanel">
+    <div role="tabpanel" ng-controller="ContatoCrtl">
         {{--NAV TABS--}}
         <ul class="nav nav-tabs">
             <li class="active"><a href="#cadastro-tab" data-toggle="tab">Cadastro</a></li>
@@ -90,9 +90,7 @@
                                     <tr>
                                         <th>Nome:</th>
                                         <td>
-                                            <a href="{!! url('contatos/altera',
-                                                ['className'=>$className, 'id'=>$cliente->contatoPrincipal->id ]) !!}
-                                                ">
+                                            <a href="#" ng-click="alteraContato({!! $cliente->contatoPrincipal->id !!})">
                                                 {!! $cliente->contatoPrincipal->nome !!} {!! $cliente->contatoPrincipal->sobrenome !!}
                                             </a>
                                         </td>

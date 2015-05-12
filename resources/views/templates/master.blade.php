@@ -129,6 +129,7 @@
 <!--Load js for page-->
 <script src="{{ URL::asset('js/dashboard.js') }}"></script>
 <script src="{{ URL::asset('js/controllers/controllers.js') }}"></script>
+<script src="{{ URL::asset('js/services/AppServices.js') }}"></script>
 
 <script>
 
