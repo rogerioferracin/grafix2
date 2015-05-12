@@ -47,9 +47,9 @@ class Cliente extends Model {
     public static function rules($id = null)
     {
         return [
-            'razao_social'  => 'required',
+            'razao_social'   => 'required',
             'nome_fantasia'  => 'required',
-            'cnpj_cpf'      => 'required|uniqueCnpjCpf:clientes,cnpj_cpf' . ($id ? ",$id" : ''),
+            'cnpj_cpf'       => 'required|cnpjCpf|uniqueCnpjCpf:clientes,cnpj_cpf' . ($id ? ",$id" : ''),
         ];
     }
 
@@ -83,9 +83,15 @@ class Cliente extends Model {
         $value = $this->attributes['cnpj_cpf'];
 
         if(strlen($value) === 11) {
-            $value = substr($value, 0, 3) . '.';
+            $value = substr($value, 0, 3) . '.'
+                .substr($value, 3, 3) . '.'
+                .substr($value, 6, 3) . '-'
+                .substr($value, 9, 2);
+
             return $value;
+
         } elseif(strlen($value) === 14) {
+
             $value = substr($value, 0, 2) . '.' .
                 substr($value, 2, 3) . '.' .
                 substr($value, 5, 3) . '/' .

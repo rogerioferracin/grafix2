@@ -15,14 +15,22 @@ class Validation extends Validator
     {
         $value = preg_replace('/\D/', '', $value);
 
-        if($value === '00000000000000' || $value === '00000000000') {
+        if(!count($value) === 14) {
+            if(!count($value) === 11) {
+                return false;
+            }
+        } elseif($value === '00000000000000' || $value === '00000000000') {
             return true;
         }
 
         $table = $parameters[0];
         $field = $parameters[1];
-        $id    = $parameters[2];
-        $id = intval($id);
+        if(isset($parameters[2])) {
+            $id    = $parameters[2];
+            $id = intval($id);
+        } else {
+            $id = null;
+        }
 
         $result = \DB::table($table)->where($field, 'LIKE', $value)->first();
 
@@ -48,11 +56,12 @@ class Validation extends Validator
      */
     public function validateCnpjCpf($attribute, $value, $parameter)
     {
+        $value = preg_replace('/\D/', '', $value);
+
         if($value === '00000000000000' || $value === '00000000000') {
             return true;
         }
 
-        $value = preg_replace('/\D/', '', $value);
         $num = array();
         for($i = 0; $i < (strlen($value)); $i++) {
             $num[] = $value[$i];

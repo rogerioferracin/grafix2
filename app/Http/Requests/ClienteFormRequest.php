@@ -41,4 +41,17 @@ class ClienteFormRequest extends Request {
 
 	}
 
+    /**
+     * Set custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'cnpj_cpf' => 'Cool baby',
+            'uniqueCnpjCpf' => 'Coll baby'
+        ];
+    }
+
 }

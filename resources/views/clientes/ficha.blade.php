@@ -89,7 +89,13 @@
                                     <thead>
                                     <tr>
                                         <th>Nome:</th>
-                                        <td>{!! $cliente->contatoPrincipal->nome !!} {!! $cliente->contatoPrincipal->sobrenome !!}</td>
+                                        <td>
+                                            <a href="{!! url('contatos/altera',
+                                                ['className'=>$className, 'id'=>$cliente->contatoPrincipal->id ]) !!}
+                                                ">
+                                                {!! $cliente->contatoPrincipal->nome !!} {!! $cliente->contatoPrincipal->sobrenome !!}
+                                            </a>
+                                        </td>
                                     </tr>
                                     </thead>
                                     <tbody>

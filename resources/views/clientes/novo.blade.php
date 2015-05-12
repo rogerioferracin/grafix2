@@ -53,7 +53,7 @@
 
 
 @section('sidebar')
-    @include('users.sidebar')
+    @include('clientes.sidebar')
 @stop
 
 @section('scripts')

@@ -23,4 +23,10 @@ class ContatoController extends Controller
         return view('contatos.novo');
     }
 
+    public function getAltera($className, $id)
+    {
+        \Toastr::info('Alterando contato');
+        return view('clientes');
+    }
+
 }

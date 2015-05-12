@@ -27,7 +27,7 @@ class CreateFuncoesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExist('funcoes');
 	}
 
 }

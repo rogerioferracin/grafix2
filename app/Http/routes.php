@@ -48,6 +48,8 @@ Route::get('tintas/{id}/delete', [
  */
 Route::controller('contatos', 'ContatoController');
 
+
+
 /**
  * ENDERECOS
  */
