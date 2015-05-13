@@ -90,7 +90,7 @@
                                     <tr>
                                         <th>Nome:</th>
                                         <td>
-                                            <a href="#" ng-click="alteraContato({!! $cliente->contatoPrincipal->id !!})">
+                                            <a href="#" ng-click="atualizaContato({{{ $cliente->contatoPrincipal->id }}})">
                                                 {!! $cliente->contatoPrincipal->nome !!} {!! $cliente->contatoPrincipal->sobrenome !!}
                                             </a>
                                         </td>
@@ -176,20 +176,23 @@
 
 @section('sidebar')
     @include('clientes.sidebar')
-
-    <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#" class="tab-link  tab-link-title" id="overview"><span class="h4">Cliente</span></a></li>
-        <li>
-            <a href="#" class="tab-link" id="btn-novo-contato" data-owner-class="Cliente" data-owner-id="{{{ $cliente->id }}}">
-                <i class="fa fa-phone"></i> Novo contato
-            </a>
-        </li>
-        <li>
-            <a href="#" class="tab-link" id="btn-print-ficha">
-                <i class="fa fa-print"></i> Ficha cadastro
-            </a>
-        </li>
-    </ul>
+    <div ng-controller="ContatoCrtl">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#" class="tab-link  tab-link-title" id="overview"><span class="h4">Cliente</span></a></li>
+            <li>
+                <a href="#" ng-click="novoContato('Cliente', {!! $cliente->id !!})" class="tab-link" >
+                    <i class="fa fa-phone"></i> Novo contato
+                    <input type="hidden" ng-init="contato.business='Cliente'">
+                    <input type="hidden" ng-init="contato.businessId={{{ $cliente->id }}}">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="tab-link" id="btn-print-ficha">
+                    <i class="fa fa-print"></i> Ficha cadastro
+                </a>
+            </li>
+        </ul>
+    </div>
 @stop
 
 @section('scripts')
