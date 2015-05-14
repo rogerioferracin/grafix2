@@ -96,9 +96,14 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
             //cria janela modal
             var modalInstance = $modal.open({
                 templateUrl : '/dialogs/contato-modal',
-                controller  : 'ModalContatoCrtl',
+                controller  : 'ModalAtualizaContatoCrtl',
                 size        : 'lg',
                 windowClass : 'contato-modal-class',
+                resolve     : {
+                    entidadeId  : function() {
+                        return $id;
+                    }
+                }
             })
 
             //Se a janela modal for encerrada executa este metodo
@@ -112,7 +117,7 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
         .controller('ModalNovoContatoCrtl', function($scope, $modalInstance, Contato, entidadeData, Sistema){
             $scope.contatoData = {};
             Sistema.showLoading(false)
-            $scope.btn_atualiza = true;
+            $scope.btn_grava = true;
 
             $scope.atualiza = function() {
                 if(confirm('Deseja gravar novo contato?')) {
@@ -142,46 +147,39 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
         })
 
         //controller do Modal de contato
-        .controller('ModalContatoCrtl', function($scope, $modalInstance, Contato, Scopes){
-
-            $scope.masterData = {};
+        .controller('ModalAtualizaContatoCrtl', function($scope, $modalInstance, Contato, entidadeId, Sistema) {
             $scope.contatoData = {};
-            $scope.loading = true;
+            Sistema.showLoading(true);
+            $scope.btn_atualiza = true;
 
-            var contato = Scopes.get('contato');
+            Contato.getById(entidadeId)
+                .success(function (result) {
+                    if (result.success) {
+                        Sistema.showLoading(false);
+                        $scope.contatoData = result.contato;
+                    }
+                });
 
-            if(contato.id) {
-                Contato.getById(contato.id)
-                    .success(function(result){
-                        if(result.success) {
-                            $scope.contatoData = result.contato;
-                            $scope.loading = false;
-                        }
-                    });
-            } else {
-                $scope.loading = false;
-            }
-
-            $scope.grava = function() {
+            $scope.grava = function () {
 
                 $scope.panel_error = false;
                 $scope.loading = true;
 
                 var confirma = confirm('Salva alterações em contato?');
 
-                if(confirma) {
+                if (confirma) {
                     Contato.save(contato, $scope.contatoData)
-                    .success(function(data) {
-                            if(data.success) {
+                        .success(function (data) {
+                            if (data.success) {
                                 $modalInstance.close(data.mensagem);
-                            } else if(data.error) {
+                            } else if (data.error) {
                                 alert(data.mensagem);
                                 $scope.errors = data.errors;
                                 $scope.panel_error = true;
                                 $scope.loading = false;
                             }
-                    })
-                    .error (function(data) {
+                        })
+                        .error(function (data) {
                         $scope.errors = data.errors;
                         $scope.panel_error = true;
                         $scope.loading = false;
@@ -189,7 +187,7 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
                 }
             }
 
-            $scope.cancel = function() {
-                $modalInstance.dismiss(false);
+            $scope.cancel = function () {
+                $modalInstance.dismiss(false)
             }
-    })
+        })
