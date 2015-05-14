@@ -114,26 +114,32 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
         }
             })
 
+        /**
+         * Controller novo contato
+         */
         .controller('ModalNovoContatoCrtl', function($scope, $modalInstance, Contato, entidadeData, Sistema){
             $scope.contatoData = {};
             Sistema.showLoading(false)
             $scope.btn_grava = true;
 
-            $scope.atualiza = function() {
+            $scope.grava = function() {
                 if(confirm('Deseja gravar novo contato?')) {
                     Sistema.showLoading(true);
 
                     Contato.save($scope.contatoData, entidadeData)
                         .success(function(result){
-
                             if(result.success) {
                                 Sistema.showLoading(false);
                                 $modalInstance.close(result.mensagem);
+                            } else if (result.error) {
+                                $scope.errors = result.errors;
+                                $scope.panel_error = true;
+                                Sistema.showLoading(false);
                             }
 
                         })
                         .error(function(result){
-                            $scope.errors = data.errors;
+                            $scope.errors = result.errors;
                             $scope.panel_error = true;
                             Sistema.showLoading(false);
                         })
@@ -146,7 +152,9 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
 
         })
 
-        //controller do Modal de contato
+        /**
+         * Controller Atualização de contato
+         */
         .controller('ModalAtualizaContatoCrtl', function($scope, $modalInstance, Contato, entidadeId, Sistema) {
             $scope.contatoData = {};
             Sistema.showLoading(true);
@@ -159,6 +167,30 @@ var grafixApp = angular.module('grafixApp', ['ui.bootstrap', 'AppServices', 'ngS
                         $scope.contatoData = result.contato;
                     }
                 });
+
+            $scope.atualiza = function(){
+                if(confirm('Deseja alterar contato?')) {
+                    Sistema.showLoading(true);
+
+                    Contato.update(entidadeId, $scope.contatoData)
+                        .success(function(result){
+                            if(result.success) {
+                                Sistema.showLoading(false);
+                                $modalInstance.close(result.mensagem);
+                            }else if (result.error) {
+                                Sistema.showLoading(false);
+                                $scope.errors = result.errors;
+                                $scope.panel_error = true;
+                            }
+
+                        })
+                        .error(function(result){
+                            $scope.errors = data.errors;
+                            $scope.panel_error = true;
+                            Sistema.showLoading(false);
+                        })
+                }
+            }
 
             $scope.grava = function () {
 

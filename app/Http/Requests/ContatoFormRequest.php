@@ -41,6 +41,8 @@ class ContatoFormRequest extends Request {
                 'errors' => $errors,
                 'mensagem'  => 'Existem erros de validação'
             );
+            \Log::alert('Retornando erros');
+
             return \Response::json($response);
         }
         \Toastr::warning('Ocorreu um erro ao validar os dados!', 'Atenção');

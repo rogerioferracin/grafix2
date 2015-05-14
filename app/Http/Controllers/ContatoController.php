@@ -84,76 +84,50 @@ class ContatoController extends Controller
     /**
      * Altera contato
      * @param ContatoFormRequest $request
-     * @param $data
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function putAlteraContato(ContatoFormRequest $request, $data)
+    public function putAlteraContato(ContatoFormRequest $request, $id)
     {
+        \Log::info($id);
 
         //checa se foi enviado um Id na request e carrega o contato
-        if (array_key_exists('id', $request->all())) {
-            $contato = Contato::find($request->get('id'));
+        $contato = Contato::find($id);
             if(!$contato) {
                 $response = array(
                     'error' => true,
                     'mensagem'  => 'Contato não encontrado, tente novamente!'
                 );
             }
-            $contato->fill($request->all());
 
-        } else {
+        $contato->fill($request->all());
+        \Log::info($contato);
 
-            $data = json_decode($data, true);
+        \DB::beginTransaction();
+        try {
 
-            $contato = new Contato();
-            $contato->fill($request->all());
+            $contato->save();
+            \DB::commit();
 
-            $modelPath = '';
-            $class = $modelPath . $data['business'];
-            $modelId = $data['businessId'];
+            $mensagem = 'Contato ' . $contato->nome_fantasia . ' gravado com sucesso';
 
-            $model = new $class();
-            $model->find($modelId);
+            \Toastr::success($mensagem, 'Sucesso');
 
-            $contato->contato_morph()->associate($model);
+            $response = array(
+                'success' => true,
+                'mensagem'  => $mensagem
+            );
 
-            \Log::info($contato);
+        } catch(\Exception $e) {
+            LogHelper::launchErrorLog($e);
+            \DB::rollBack();
 
+            $response = array(
+                'error' => true,
+                'mensagem'  => 'Ocorreu um erro ao alterar o contato. Tente novamente.'
+            );
 
         }
-
-
-        $response = array(
-            'success' => true,
-            'mensagem'  => 'Contato ' . $contato->nome_fantasia . ' gravado com sucesso'
-        );
-
-
-//        \DB::beginTransaction();
-//        try {
-//
-//            $contato->save();
-//            \DB::commit();
-//
-//            $mensagem = 'Contato ' . $contato->nome_fantasia . ' gravado com sucesso';
-//
-//            \Toastr::success($mensagem, 'Sucesso');
-//
-//            $response = array(
-//                'success' => true,
-//                'mensagem'  => $mensagem
-//            );
-//
-//        } catch(\Exception $e) {
-//            LogHelper::launchErrorLog($e);
-//            \DB::rollBack();
-//
-//            $response = array(
-//                'error' => true,
-//                'mensagem'  => 'Ocorreu um erro ao alterar o contato. Tente novamente.'
-//            );
-//
-//        }
 
         return \Response::json($response);
 

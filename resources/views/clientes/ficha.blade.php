@@ -146,7 +146,9 @@
                         <tbody>
                             @foreach($cliente->contatos as $contato)
                                 <tr>
-                                    <td>{!! $contato->nome !!}</td>
+                                    <td>
+                                        <a href="#" ng-click="atualizaContato({{{ $contato->id }}})">{!! $contato->nome !!}</a>
+                                    </td>
                                     <td>{!! $contato->cargo !!}</td>
                                     <td>{!! $contato->telefone !!}</td>
                                     <td>{!! $contato->celular !!}</td>

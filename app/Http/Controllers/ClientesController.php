@@ -125,7 +125,7 @@ class ClientesController extends Controller
             return redirect('/clientes');
 
         } catch(\Exception $e) {
-            LogHelper::launchErrorLog($e);
+
             \DB::rollBack();
             return redirect('/');
         }

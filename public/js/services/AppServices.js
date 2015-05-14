@@ -35,12 +35,12 @@ angular.module('AppServices', ['ui.bootstrap'])
                     data    : $.param(contatoData)
                 })
             },
-            update  : function(id, contato) {
+            update  : function(contatoId, contatoData) {
                 return $http({
                     method  : 'put',
-                    url     : '/contatos/altera-contato' + id,
+                    url     : '/contatos/altera-contato/' + contatoId,
                     headers : {'Content-type' : 'application/x-www-form-urlencoded'},
-                    data    : $.param(contato)
+                    data    : $.param(contatoData)
                 })
             }
         }
