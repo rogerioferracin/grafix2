@@ -48,7 +48,10 @@ Route::get('tintas/{id}/delete', [
  */
 Route::controller('contatos', 'ContatoController');
 
-
+/**
+ * FINANCEIRAS
+ */
+Route::controller('financeiras', 'FinanceirasController');
 
 /**
  * ENDERECOS
