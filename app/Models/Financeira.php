@@ -10,9 +10,16 @@ class Financeira extends Model {
     {
         return $this->morphOne('Grafix\Models\Endereco', 'endereco_morph');
     }
+
     public function contatos()
     {
-        return $this->morphOne('Grafix\Models\Contato', 'contato_morph');
+        return $this->morphMany('Grafix\Models\Contato', 'contato_morph');
+    }
+
+    public function contatoPrincipal()
+    {
+        return $this->morphOne('Grafix\Models\Contato', 'contato_morph')
+            ->where('contato_principal', '=', 1);
     }
 
     //Validation rules -----------------------------------------------------------------------------

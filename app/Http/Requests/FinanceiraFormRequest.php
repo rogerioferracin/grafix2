@@ -24,12 +24,26 @@ class FinanceiraFormRequest extends Request {
 	 */
 	public function rules()
 	{
-		return array_merge(
-            Financeira::rules(),
-            Contato::rules(),
-            Endereco::$rules
 
-        );
+        $id = $this->route()->parameter('one');
+
+        switch($this->method()) {
+            case 'POST' : {
+                return array_merge(
+                    Financeira::rules(),
+                    Contato::rules(),
+                    Endereco::$rules
+
+                );
+            }
+            case 'PUT' : {
+                return array_merge(
+                    Financeira::rules(),
+                    Endereco::$rules
+                );
+            }
+        }
+
 	}
 
 }

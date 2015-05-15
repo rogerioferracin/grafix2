@@ -37,7 +37,8 @@ class Contato extends Model {
     {
         return array(
             'nome'      => 'required',
-            'telefone'  => 'required'
+            'telefone'  => 'required',
+            'email'     =>'email'
         );
     }
 

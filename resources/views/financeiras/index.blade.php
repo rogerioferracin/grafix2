@@ -4,8 +4,8 @@
     <table class="table table-striped" id="tabela-clientes">
         <thead>
         <tr>
-            <th>Nome</th>
-            <th>CNPJ/CPF</th>
+            <th>Financeira</th>
+            <th>Conta</th>
             <th>Contato</th>
             <th>Telefone</th>
             <th>Email</th>
@@ -15,8 +15,8 @@
         <tbody>
         @foreach($financeiras as $financeira)
             <tr>
-                <td>{!! $financeira->nome_fantasia !!}</td>
-                <td>{!! $financeira->cnpj_cpf !!}</td>
+                <td>{!! $financeira->financeira !!}</td>
+                <td>{!! $financeira->conta !!}</td>
                 <td>
                     {!! $financeira->contatoPrincipal->nome . ' ' . $financeira->contatoPrincipal->sobrenome !!}
                 </td>
